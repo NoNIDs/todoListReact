@@ -42,41 +42,19 @@ code {
 .todo_item input {
   margin-right: 1rem;
 }
+.todo_add_button {
+  background-color: #fff;
+  color: #007bff;
+  border-radius: 0.25rem;
+  padding: 0.25rem 1rem;
+  margin: 1rem 0.5rem;
+  border: 1px solid #b8bcc0;
+  transition: 0.5s ease-in-out;
+}
+.todo_add_button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
 .checked {
   text-decoration: line-through;
 }
-
-/* Pagination styles */
-/* .todo_pagination {
-  width: 50%;
-  margin: 20px auto;
-}
-.pagination_list {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-.pagination_item {
-  border: 1px solid #ccc;
-  padding: 0.5rem;
-  margin: 0.5rem;
-  transition: all ease-in-out 0.3s;
-}
-.pagination_item:hover {
-  color: #188cff;
-  border-color: #125da8;
-}
-.pagination_nav {
-  margin: 0.3rem;
-  transition: all ease-in-out 0.3s;
-}
-.pagination_nav:last-child {
-  margin-left: auto;
-}
-.pagination_nav:hover {
-  color: #188cff;
-  cursor: pointer;
-} */

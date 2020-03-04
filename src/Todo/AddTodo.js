@@ -38,7 +38,9 @@ class AddTodo extends Component {
           value={title}
           onChange={this.handleChange}
         ></input>
-        <button type="submit">Add todo</button>
+        <button type="submit" className="todo_add_button">
+          Add todo
+        </button>
       </form>
     );
   }
