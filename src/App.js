@@ -7,9 +7,7 @@ class App extends Component {
   state = {
     //JSON parsing to retrieve state
     todos: JSON.parse(localStorage.getItem("allTodos")) || [],
-    currentTodos: [],
-    currentPage: 1,
-    totalPages: 1,
+    currentPage: null,
     pageLimit: 5
   };
 
@@ -19,13 +17,8 @@ class App extends Component {
   }
 
   onPageChanged = data => {
-    const { todos, pageLimit, totalPages } = this.state;
     const { currentPage } = data;
-
-    const offset = (currentPage - 1) * pageLimit;
-    const currentTodos = todos.slice(offset, offset + pageLimit);
-
-    this.setState({ currentPage, currentTodos, totalPages });
+    this.setState({ currentPage });
   };
 
   checked = id => {
@@ -40,34 +33,28 @@ class App extends Component {
   };
 
   removeCharacter = id => {
-    const { todos, currentPage, pageLimit } = this.state;
-    const offset = (currentPage - 1) * pageLimit;
+    const { todos } = this.state;
     this.setState({
       todos: todos.filter(todo => {
         return todo.id !== id;
-      }),
-      currentTodos: todos.slice(offset, offset + pageLimit),
-      totalPages: Math.ceil(todos.length / pageLimit)
+      })
     });
   };
 
   handleSubmit = todo => {
     this.setState({
-      todos: [...this.state.todos, todo],
-      totalPages: Math.ceil(this.state.todos.length / this.state.pageLimit)
+      todos: [...this.state.todos, todo]
     });
   };
 
   render() {
-    const {
-      todos,
-      currentPage,
-      totalPages,
-      currentTodos,
-      pageLimit
-    } = this.state;
+    const { todos, currentPage, pageLimit } = this.state;
 
+    const offset = (currentPage - 1) * pageLimit;
+    const currentTodos = todos.slice(offset, offset + pageLimit);
     const totalTodos = todos.length;
+
+    const totalPages = Math.ceil(totalTodos / pageLimit);
 
     const headerClass = [
       "text-dark py-2 pr-4 m-0",
@@ -93,9 +80,10 @@ class App extends Component {
         </div>
         <div className="d-flex flex-row py-4 align-items-center">
           <Pagination
+            totalRecords={totalTodos}
             totalPages={totalPages}
             pageLimit={pageLimit}
-            pageNeighbours={2}
+            pageNeighbours={1}
             onPageChanged={this.onPageChanged}
           />
         </div>
